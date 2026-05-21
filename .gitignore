@@ -1,1 +1,10 @@
-/build/
+target/
+build/
+bin/
+*.class
+.classpath
+.project
+.settings/
+.env
+*.war
+*.jar
