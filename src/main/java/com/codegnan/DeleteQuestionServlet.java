@@ -17,7 +17,10 @@ public class DeleteQuestionServlet extends HttpServlet {
             int id = Integer.parseInt(idStr);
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz", "root", "harivinnu@143");
+            String dbUrl = System.getenv("DB_URL") != null ? System.getenv("DB_URL") : "jdbc:mysql://localhost:3306/quiz";
+            String dbUser = System.getenv("DB_USERNAME") != null ? System.getenv("DB_USERNAME") : "root";
+            String dbPass = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "harivinnu@143";
+            Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
             PreparedStatement ps = con.prepareStatement("DELETE FROM questions WHERE id = ?");
             ps.setInt(1, id);

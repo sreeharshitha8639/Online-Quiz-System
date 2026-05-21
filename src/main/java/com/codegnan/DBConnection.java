@@ -7,9 +7,15 @@ import java.sql.ResultSet;
 import java.util.List;
 
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/quizdb";
-    private static final String USER = "root";
-    private static final String PASSWORD = "harivinnu@143";
+	private static final String URL = System.getenv("DB_URL") != null 
+		    ? System.getenv("DB_URL") 
+		    : "jdbc:mysql://localhost:3306/quizdb";
+		private static final String USER = System.getenv("DB_USERNAME") != null 
+		    ? System.getenv("DB_USERNAME") 
+		    : "root";
+		private static final String PASSWORD = System.getenv("DB_PASSWORD") != null 
+		    ? System.getenv("DB_PASSWORD") 
+		    : "harivinnu@143";
 
     public static Connection getConnection() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
