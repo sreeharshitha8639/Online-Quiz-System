@@ -15,8 +15,19 @@ public class SubmitQuizServlet extends HttpServlet {
         int total = 0, correct = 0;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz", "root", "harivinnu@143");
+        	Class.forName("com.mysql.cj.jdbc.Driver");
+
+            String dbUrl = System.getenv("DB_URL") != null
+                ? System.getenv("DB_URL")
+                : "jdbc:mysql://localhost:3306/quiz";
+            String dbUser = System.getenv("DB_USERNAME") != null
+                ? System.getenv("DB_USERNAME")
+                : "root";
+            String dbPass = System.getenv("DB_PASSWORD") != null
+                ? System.getenv("DB_PASSWORD")
+                : "harivinnu@123";
+
+            Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
             String sql = "SELECT id, correct_answer FROM questions WHERE subject = ?";
             PreparedStatement ps = con.prepareStatement(sql);
