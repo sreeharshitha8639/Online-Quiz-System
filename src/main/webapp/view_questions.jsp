@@ -20,6 +20,8 @@
         </tr>
 <%
     try {
+    	Class.forName("com.mysql.cj.jdbc.Driver");
+    	
         String dbUrl = System.getenv("DB_URL") != null
             ? System.getenv("DB_URL")
             : "jdbc:mysql://localhost:3306/quiz";
